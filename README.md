@@ -1,2 +1,2 @@
 # Algorithms
-Comming soon...
+# randomized
