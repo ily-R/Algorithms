@@ -134,7 +134,7 @@ def read_data():
 
 
 n, points_x_sorted, points_y_sorted = read_data()
-print(minimum_distance(points_sorted_x, points_sorted_y, n))
+print(minimum_distance(points_x_sorted, points_y_sorted, n))
 
 
 
