@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import random
 import time
-
+from matplotlib.legend_handler import HandlerLine2D
 
 def partition3(a, l, r):
     """Partition a list of integers into 3 parts with respect to the pivot (a[l]).
@@ -106,17 +106,16 @@ def randomized_quick_sort2(numbers, l, r):
 
 def randomized_quick_sort_complexity():
     """randomized_quick_sort_complexity
-        plot the running time of randomized_quick_sort2 and
-        randomized_quick_sort3 versus the list size.
+        plot the runningtime of randomized_quick_sort2 and
+        randomized_quick_sort3 versus the data size.
 
-        for each size n generate n random integers uniformly in range (0, 10000) and
+        for each size n generate n random integers uniformly in range (0, 3000) and
         apply random_quick_sort2 and random_quick_sort3 and measure the running time.
 
-        as n increases randomized_quick_sort2 tend to O(n²) as there are more and more equal numbers in the list.
-        but randomized_quick_sort3 stays around O(n*log(n))
+        as n increases randomized_quick_sort2 tend to O(n²) as there are more and more equal elements in the list.
+        but randomized_quick_sort3 stablizes around O(n*log(n))
     """
-    N = [10000, 20000, 30000, 40000, 50000, 60000, 70000, 80000, 90000, 100000,200000,300000,400000,500000,
-         700000, 1000000]
+    N = [1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000,20000,30000]
     timings3 = []
     timings2 = []
     for n in N:
@@ -124,7 +123,7 @@ def randomized_quick_sort_complexity():
         T2 = 0
         print(n)
         for i in range(20):
-            numbers = np.random.random_integers(0, 10000, n)
+            numbers = np.random.random_integers(0, 3000, n)
             t3 = time.time()
             output3 = randomized_quick_sort3(numbers, 0, n-1)
             t_elapsed3 = time.time() - t3
@@ -138,8 +137,9 @@ def randomized_quick_sort_complexity():
         timings3.append(T3/20)
         timings2.append(T2/20)
 
-    plt.plot(N, timings3, 'r--')
-    plt.plot(N, timings2, 'b--')
+    line1,  = plt.plot(N, timings3, 'r--', label= 'randomized_quick_sort3')
+    line2,  = plt.plot(N, timings2, 'b--', label= 'randomized_quick_sort2')
+    plt.legend(handler_map={line1: HandlerLine2D()})
     plt.show()
 
 
