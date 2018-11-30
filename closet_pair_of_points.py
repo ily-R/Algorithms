@@ -4,6 +4,7 @@ from math import *
 import numpy as np
 import matplotlib.pyplot as plt
 import time
+from matplotlib.legend_handler import HandlerLine2D
 
 
 def euclidean_distance(p1, p2):
@@ -83,9 +84,11 @@ def minimum_distance(points_sorted_x, points_sorted_y, n):
         return:
             d: the distance between the closest points in points_sorted_x
     """
-    if n == 2:
+    if n == 1:
+        return 100000   # just return a big number
+    elif n == 2:
         return euclidean_distance(points_sorted_x[0], points_sorted_x[1])
-    if n == 3:
+    elif n == 3:
         da = euclidean_distance(points_sorted_x[0], points_sorted_x[1])
         db = euclidean_distance(points_sorted_x[0], points_sorted_x[2])
         dc = euclidean_distance(points_sorted_x[1], points_sorted_x[2])
@@ -93,6 +96,10 @@ def minimum_distance(points_sorted_x, points_sorted_y, n):
 
     m = floor(n/2)
     x_axis = (points_sorted_x[m - 1][0] + points_sorted_x[m][0]) / 2  # split the plane and solve each part separately.
+    while points_sorted_x[m - 1][0] == points_sorted_x[m][0]:
+        m += 1
+        if m == n-1:
+            break
     left_points_y_sorted = []
     right_points_y_sorted = []
     for point in points_sorted_y:
@@ -131,11 +138,55 @@ def read_data():
     points_y_sorted = sorted(points, key=lambda x: x[1])
     return n, points_x_sorted, points_y_sorted
 
+def naive(pnts):
+    d = euclidean_distance(pnts[-1], pnts[0])
+    for i in range(len(pnts) - 1):
+        for j in range(i+1, len(pnts)):
+            d = min(d, euclidean_distance(pnts[i], pnts[j]))
+    return d
+
+
+def complexity():
+    N = [1000, 1300, 1700, 2000, 2300, 2700, 3000, 3300, 3700, 4000, 4300, 4700, 5000]
+    time_opt_list = []
+    time_naive_list = []
+    for n in N:
+        total_opt_time = 0
+        total_naive_time = 0
+        print('...', n)
+        for j in range(10):
+            points = [tuple((np.random.randint(-10000, 10000), np.random.randint(-10000, 10000))) for i in range(n)]
+            t_naive = time.time()
+            dist_naive = naive(points)
+            t_naive_elapsed = time.time() - t_naive
+
+            t_opt = time.time()
+            points_x_sorted = sorted(points)
+            points_y_sorted = sorted(points, key=lambda x: x[1])
+            dist_opt = closet_pair_of_points(points_x_sorted, points_y_sorted, n)
+            t_opt_elapsed = time.time() - t_opt
+            if dist_naive != dist_opt:
+                print('Error')
+                print(dist_naive)
+                print(dist_opt)
+                return
+            total_opt_time += t_opt_elapsed
+            total_naive_time += t_naive_elapsed
+            del points
+            del points_x_sorted
+            del points_y_sorted
+
+        time_opt_list.append(total_opt_time/10)
+        time_naive_list.append(total_naive_time/10)
+
+    line1,  = plt.plot(N, time_naive_list, 'r--', label= 'naive_approach')
+    line2,  = plt.plot(N, time_opt_list, 'b--', label= 'divide&conquer approach')
+    plt.legend(handler_map={line1: HandlerLine2D()})
+    plt.show()
 
 
 n, points_x_sorted, points_y_sorted = read_data()
 print(minimum_distance(points_x_sorted, points_y_sorted, n))
-
 
 
 
