@@ -15,4 +15,7 @@ Detailed algorithm for randomized quick-sort that adapts to a sequence containin
 The edit distance between two strings is the minimum number of operations (insertions, deletions, and substitutions of symbols) to transform one string into another. It is a measure of similarity of two strings. Edit distance has applications, for example, in computational biology, natural language processing, and spell checking. For instance, given two sequences of a DNA, we can quantify the similarity between the two sequences and the optimal transformation from sequence 1 to sequence 2 which can be viewd as strings of the letters A, C, G and T. The straightforward, recursive way of evaluating this recurrence takes exponential time. Given a string A of length n and B of length m and using Dynamic programming, we will construct a matrix D of size (n+1)x(m+1), such that D(i, j) is the minimal editing distance between A(0:i) and B(0:j). Consequently, the algorithm return D(n, m) as the minimal editing distance between A and B. The complexity is that of constructing the matrix D, so O(nm) and finding the transformation afterwards is done in O(m +n). Here's an example that shows the minimal edting distance between "writers" and "vintner", as well as the re-construction path.
 ![dynamic programming matrix ](https://github.com/ilyasAr/Algorithms/blob/master/editDistance_matrix.jpg)
 
-
+- **largest_common_subsequence2.py**:
+...................................
+- **largest_common_subsequence3.py**:
+...................................
