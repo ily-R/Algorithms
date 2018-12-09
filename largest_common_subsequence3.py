@@ -59,9 +59,9 @@ def read_data():
     sequence2: a string input
     sequence3: a string input
     """
-    sequence1 = input()
-    sequence2 = input()
-    sequence3 = input()
+    sequence1 = input("sequence1:")
+    sequence2 = input("sequence2:")
+    sequence3 = input("sequence3:")
     n = len(sequence1)
     m = len(sequence2)
     l = len(sequence3)
@@ -74,5 +74,5 @@ D = np.zeros((n + 1, m + 1, l + 1), dtype=np.uint64)
 longest_sequence_size = longest_subsequence3(n, m, l)
 output_alignment(n, m, l)
 
-print(longest_sequence_size)
-print(common_sequence)
+print("longest_common sequence_size", longest_sequence_size)
+print("common sequence: ", common_sequence)
