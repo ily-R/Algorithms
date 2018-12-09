@@ -16,8 +16,8 @@ The edit distance between two strings is the minimum number of operations (inser
 ![dynamic programming matrix ](https://github.com/ilyasAr/Algorithms/blob/master/editDistance_matrix.jpg)
 
 - **largest_common_subsequence2.py**:
-...................................
+Given two sequences 𝐴 = (𝑎1, 𝑎2, . . . , 𝑎𝑛) and 𝐵 = (𝑏1, 𝑏2, . . . , 𝑏𝑚), find the length of their longest common subsequence, i.e., the largest non-negative integer 𝑝 such that there exist indices 1 ≤ 𝑖1 < 𝑖2 < · · · < 𝑖𝑝 ≤ 𝑛 and 1 ≤ 𝑗1 < 𝑗2 < · · · < 𝑗𝑝 ≤ 𝑚, such that 𝑎𝑖1 = 𝑏𝑗1 , . . . , 𝑎𝑖𝑝 = 𝑏𝑗𝑝.It differs from the longest common substring problem: unlike substrings, subsequences are not required to occupy consecutive positions within the original sequences. Using Dynamic programming, we will construct a matrix D of size (n+1)x(m+1), such that D(i, j) is the longest subsequence size between A(0:i) and B(0:j). The complexity is that of constructing the matrix D, so O(nm) and finding the transformation afterwards is done in O(m +n). it's has the same complexity as editDistance_2.
 - **largest_common_subsequence3.py**:
-...................................
+Given three sequences 𝐴 = (𝑎1, 𝑎2, . . . , 𝑎𝑛), 𝐵 = (𝑏1, 𝑏2, . . . , 𝑏𝑚), and 𝐶 = (𝑐1, 𝑐2, . . . , 𝑐𝑙), find the length of their longest common subsequence, i.e., the largest non-negative integer 𝑝 such that there exist indices 1 ≤ 𝑖1 < 𝑖2 < · · · < 𝑖𝑝 ≤ 𝑛, 1 ≤ 𝑗1 < 𝑗2 < · · · < 𝑗𝑝 ≤ 𝑚, 1 ≤ 𝑘1 < 𝑘2 < · · · < 𝑘𝑝 ≤ 𝑙 such that 𝑎𝑖1 = 𝑏𝑗1 = 𝑐𝑘1 , . . . , 𝑎𝑖𝑝 = 𝑏𝑗𝑝 = 𝑐𝑘𝑝. In fact, we will use the same approach in largest_common_subsequence2, but now with constructing a 3D array D of size (n+1)x(m+1)x(l+1), such that D(i, j, k) is the longest subsequence size between A(0:i), B(0:j) and C(0:k).
 - **placing_parentheses.py**:
 ...............................
