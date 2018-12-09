@@ -32,7 +32,7 @@ def output_alignment(i, j):
         return
     if i > 0 and D[i, j] == D[i-1, j]:
         output_alignment(i - 1, j)
-    elif j > 0 and D[i][j] == D[i, j - 1]:
+    elif j > 0 and D[i, j] == D[i, j - 1]:
         output_alignment(i, j - 1)
     else:
         output_alignment(i-1, j-1)
