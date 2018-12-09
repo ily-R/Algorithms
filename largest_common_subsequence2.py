@@ -16,7 +16,7 @@ def longest_subsequence(n, m):
             if A[i-1] == B[j-1]:
                 D[i, j] = D[i-1, j-1] + 1
             else:
-                D[i][j] = max([D[i-1, j], D[i, j-1]])
+                D[i, j] = max([D[i-1, j], D[i, j-1]])
     return D[n, m]
 
 
@@ -30,9 +30,9 @@ def output_alignment(i, j):
     global common_sequence
     if i == 0 and j == 0:
         return
-    if i > 0 and D[i][j] == D[i-1][j]:
+    if i > 0 and D[i, j] == D[i-1, j]:
         output_alignment(i - 1, j)
-    elif j > 0 and D[i][j] == D[i][j - 1]:
+    elif j > 0 and D[i][j] == D[i, j - 1]:
         output_alignment(i, j - 1)
     else:
         output_alignment(i-1, j-1)
